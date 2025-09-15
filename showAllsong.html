@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show All Songs</title>
+    <style>
+        body {
+            background-image: url('/static/Images/music.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-collapse: collapse;
+            width: 90%;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: darkblue;
+            color: white;
+        }
+        h1 {
+            color: darkred;
+        }
+        a {
+            color: darkblue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Show All Songs</h1>
+        <a href="/addsong">Add New Song</a>
+        <hr/>        
+        <table>
+            <tr>
+                <th>Song ID</th>
+                <th>Song Name</th>
+                <th>Subscription Plan</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Audio</th>
+                <th>Category</th>
+            </tr>
+            {% for song in songs %}
+            <tr>
+                <td>{{ song[0] }}</td>
+                <td>{{ song[1] }}</td>
+                <td>{{ song[2] }}</td> 
+                <td>{{ song[3] }}</td>
+                <td>
+                    {% if song[4] %}
+                        <img src="/static/{{ song[4] }}" alt="Song Image" width="80">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>
+                    {% if song[2] == "Free" %}
+                        <!-- Disable download for Free plan -->
+                        <audio controls controlsList="nodownload">
+                            <source src="/static/{{ song[5] }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    {% else %}
+                        <audio controls>
+                            <source src="/static/{{ song[5] }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    {% endif %}
+                </td>
+                <td>{{ song[6] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>

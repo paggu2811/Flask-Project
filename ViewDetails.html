@@ -1,0 +1,54 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+<form method="post">
+<table class="table">
+    <tr>
+        <td>Song Id</td>
+        <td>
+            {{ song[0] }}
+            <input type="hidden" name="song_id" value="{{ song[0] }}"/>
+        </td>
+    </tr>
+    <tr><td>Song Name</td><td>{{ song[1] }}</td></tr>
+
+    
+    <tr>
+        <td>Song Subscription Plan</td>
+        <td>
+            <select name="subscription_plan" class="form-control" style="width: 200px;">
+                <option value="Free">Free</option>
+                <option value="Monthly">Monthly - ₹199</option>
+                <option value="Yearly">Yearly - ₹999</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr><td>Song Description</td><td>{{ song[3] }}</td></tr>
+
+    <tr>
+        <td>Song Image</td>
+        <td>
+            <img src="{{ url_for('static', filename=song[4]) }}"
+                 style="height:300px;width:300px" class="img-rectangle"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Song Audio</td>
+        <td>
+            <audio controls controlsList="nodownload">
+                <source src="{{ url_for('static', filename=song[5]) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <button class="btn btn-danger" type="submit"> Add To Playlist</button>
+        </td>
+    </tr>
+</table>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+    {% if status == "success" %}
+        <h2> Payment Successful!</h2>
+        <p>Your playlist has been marked as Paid.</p>
+    {% else %}
+        <h2>Payment Failed</h2>
+        <p>Invalid card details. Please try again.</p>
+    {% endif %}
+{% endblock %}
